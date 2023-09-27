@@ -74,7 +74,7 @@ export const align_objects: Rule.RuleModule = {
     // noinspection JSUnusedGlobalSymbols
     return {
       // eslint-disable-next-line prefer-snakecase/prefer-snakecase
-      "ObjectExpression:exit"(node) {
+      ObjectExpression(node) {
         if (ignore_parent_types.includes(node.parent.type)) {
           return;
         }
