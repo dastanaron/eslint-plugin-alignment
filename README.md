@@ -104,18 +104,20 @@ interface User {
 <td>
 
 ```ts
+// prettier-ignore
 type ContactInfo = {
-  name /*    */ : string;
-  email /*   */ : string;
+  name /*    */: string;
+  email /*   */: string;
   phone /*  */?: string;
   address /**/?: string;
 };
 
+// prettier-ignore
 interface User {
-  id /*      */ : number;
-  username /**/ : string;
-  email /*   */ : string;
-  age /*     */ : number;
+  id /*      */: number;
+  username /**/: string;
+  email /*   */: string;
+  age /*     */: number;
 }
 ```
 
