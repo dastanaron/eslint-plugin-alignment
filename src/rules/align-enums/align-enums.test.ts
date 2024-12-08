@@ -32,15 +32,14 @@ tester.run("align_enums", align_enums, {
       `,
       output: `
         enum Direction {
-          UP /*   */ = "up",
-          DOWN /* */ = "down",
-          LEFT /* */ = "left",
-          RIGHT /**/ = "right",
+          UP    = "up",
+          DOWN  = "down",
+          LEFT  = "left",
+          RIGHT = "right",
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "not_aligned",
         },
       ],
@@ -57,15 +56,14 @@ tester.run("align_enums", align_enums, {
       `,
       output: `
         enum Direction {
-          UP /*   */ = 1,
-          DOWN /* */ = 2,
-          LEFT /* */ = 3,
-          RIGHT /**/ = 4,
+          UP    = 1,
+          DOWN  = 2,
+          LEFT  = 3,
+          RIGHT = 4,
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "not_aligned",
         },
       ],
@@ -82,15 +80,14 @@ tester.run("align_enums", align_enums, {
       `,
       output: `
         enum Direction {
-          UP /*    */ = 1,
-          "DOWN" /**/ = 2,
-          "LEFT" /**/ = 3,
-          RIGHT /* */ = 4,
+          UP     = 1,
+          "DOWN" = 2,
+          "LEFT" = 3,
+          RIGHT  = 4,
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "not_aligned",
         },
       ],
@@ -107,42 +104,14 @@ tester.run("align_enums", align_enums, {
       `,
       output: `
         enum Direction {
-          UP /*   */ = "up",
+          UP    = "up",
           DOWN,
           LEFT,
-          RIGHT /**/ = "right",
+          RIGHT = "right",
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
-          messageId: "not_aligned",
-        },
-      ],
-    },
-    {
-      name: "custom spacing character",
-      code: `
-        enum Direction {
-          UP = 1,
-          DOWN = 2,
-          LEFT = 3,
-          RIGHT = 4,
-        }
-      `,
-      output: `
-        enum Direction {
-          UP /*###*/ = 1,
-          DOWN /*#*/ = 2,
-          LEFT /*#*/ = 3,
-          RIGHT /**/ = 4,
-        }
-      `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
-      options: [{ spacingCharacter: "#" }],
-      errors: [
-        {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "not_aligned",
         },
       ],

@@ -3,7 +3,6 @@ import { align_objects } from "./align-objects";
 
 const tester = new RuleTester({
   parser: require.resolve("@typescript-eslint/parser"),
-  /* eslint-disable prefer-snakecase/prefer-snakecase */
   parserOptions: {
     ecmaVersion: 6,
     sourceType: "module",
@@ -11,7 +10,6 @@ const tester = new RuleTester({
       jsx: true,
     },
   },
-  /* eslint-enable prefer-snakecase/prefer-snakecase */
 });
 
 tester.run("align_objects", align_objects, {
@@ -51,7 +49,6 @@ tester.run("align_objects", align_objects, {
           other_key: false
         })
       `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       options: ["always", { ignoreParentTypes: ["CallExpression"] }],
     },
   ],
@@ -73,15 +70,15 @@ tester.run("align_objects", align_objects, {
       `,
       output: `
         const obj = {
-          some_key /*                          */: 1,
-          other_key /*                         */: 2,
-          key_with_boolean_value /*            */: true,
-          key_with_string_literal_value /*     */: "foo",
-          key_with_constructor /*              */: String,
-          key_with_function_expression /*       */ () {},
-          key_with_arrow_function_expression /**/: () => {},
-          ["computed_key" /*                  */]: true,
-          empty_object /*                      */: {}
+          some_key:                          1,
+          other_key:                         2,
+          key_with_boolean_value:            true,
+          key_with_string_literal_value:     "foo",
+          key_with_constructor:               String,
+          key_with_function_expression        () {},
+          key_with_arrow_function_expression: () => {},
+          ["computed_key"]:                   true,
+          empty_object:                       {}
         };
       `,
       errors: [
@@ -101,8 +98,8 @@ tester.run("align_objects", align_objects, {
       `,
       output: `
         const obj = {
-          some_key /*   */: 1,
-          another_key /**/: true,
+          some_key: 1,
+          another_key: true,
           ...other_obj
         };
       `,
@@ -228,7 +225,6 @@ tester.run("align_objects", align_objects, {
           some_key /*             */: {}
         };
       `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       options: ["always", { commentOutsideComputedKey: true }],
       errors: [
         {
@@ -250,7 +246,6 @@ tester.run("align_objects", align_objects, {
           ["computed_key"] /*     */: {}
         };
       `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       options: ["always", { commentOutsideComputedKey: true }],
       errors: [
         {
@@ -306,7 +301,6 @@ tester.run("align_objects", align_objects, {
           ["five"] /* */: 5
         };
       `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       options: ["always", { commentOutsideComputedKey: true }],
       errors: [
         {
@@ -328,7 +322,6 @@ tester.run("align_objects", align_objects, {
           other_key /**/: false
         };
       `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       options: ["always", { spacingCharacter: "#" }],
       errors: [
         {

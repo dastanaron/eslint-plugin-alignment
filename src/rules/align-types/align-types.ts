@@ -1,6 +1,6 @@
 import {
-  create_rule,
-  get_alignment_comment,
+  createRule,
+  getAlignmentSpaces,
   is_ts_property_signature_node,
   is_ts_type_literal_node,
 } from "../../utils";
@@ -19,18 +19,15 @@ type PropertyWithLocation = {
 
 type Options = [
   {
-    /* eslint-disable prefer-snakecase/prefer-snakecase */
     spacingCharacter?: string;
     disableInterfaces?: boolean;
     disableTypeLiterals?: boolean;
-    /* eslint-enable prefer-snakecase/prefer-snakecase */
   },
 ];
 
 type MessageIds = "interface_not_aligned" | "type_literal_not_aligned";
 
-export const align_types = create_rule<Options, MessageIds>({
-  /* eslint-disable prefer-snakecase/prefer-snakecase */
+export const alignTypes = createRule<Options, MessageIds>({
   name: "align-interfaces",
   meta: {
     docs: {
@@ -46,11 +43,6 @@ export const align_types = create_rule<Options, MessageIds>({
       {
         type: "object",
         properties: {
-          spacingCharacter: {
-            type: "string",
-            maxLength: 1,
-            minLength: 1,
-          },
           disableInterfaces: {
             type: "boolean",
           },
@@ -66,7 +58,6 @@ export const align_types = create_rule<Options, MessageIds>({
   },
   defaultOptions: [
     {
-      spacingCharacter: " ",
       disableInterfaces: false,
       disableTypeLiterals: false,
     },
@@ -75,13 +66,11 @@ export const align_types = create_rule<Options, MessageIds>({
     context,
     [
       {
-        spacingCharacter: spacing_character,
         disableInterfaces: disable_interfaces,
         disableTypeLiterals: disable_type_literals,
       },
     ]
   ) {
-    /* eslint-enable prefer-snakecase/prefer-snakecase */
 
     const handle_node = (
       node: TSESTree.TSInterfaceBody | TSESTree.TSTypeLiteral
@@ -110,7 +99,6 @@ export const align_types = create_rule<Options, MessageIds>({
 
       const properties_with_location = Object.values(
         properties
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           .map(({ key, optional, typeAnnotation: type_annotation }) => ({
             key,
             type_annotation,
@@ -150,7 +138,6 @@ export const align_types = create_rule<Options, MessageIds>({
 
       context.report({
         node,
-        // eslint-disable-next-line prefer-snakecase/prefer-snakecase
         messageId: is_ts_type_literal_node(node)
           ? "type_literal_not_aligned"
           : "interface_not_aligned",
@@ -163,15 +150,13 @@ export const align_types = create_rule<Options, MessageIds>({
           for (const property of properties_with_location) {
             yield fixer.insertTextAfter(
               property.key,
-              " " + // Extra leading space
-                get_alignment_comment(
+                getAlignmentSpaces(
                   Math.max(
                     0,
                     property_with_longest_key.key_end -
                       property.key_end -
                       (property.optional ? 1 : 0) // Subtract a column for the question mark
                   ),
-                  spacing_character
                 )
             );
           }
@@ -181,10 +166,8 @@ export const align_types = create_rule<Options, MessageIds>({
 
     // noinspection JSUnusedGlobalSymbols
     return {
-      /* eslint-disable prefer-snakecase/prefer-snakecase */
       TSTypeLiteral: handle_node,
       TSInterfaceBody: handle_node,
-      /* eslint-enable prefer-snakecase/prefer-snakecase */
     };
   },
 });

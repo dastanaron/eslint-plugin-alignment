@@ -3,9 +3,8 @@
  * @param length Number of spacing characters between the comment
  * @param char Custom spacing character
  */
-export const get_alignment_comment = (
+export const getAlignmentSpaces = (
   length: number = 0,
-  char: string = " "
 ) => {
-  return `/*${char.repeat(length)}*/`;
+  return ' '.repeat(length);
 };

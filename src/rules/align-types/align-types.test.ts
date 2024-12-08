@@ -1,18 +1,18 @@
 import { RuleTester } from "@typescript-eslint/rule-tester";
-import { align_types } from "./align-types";
+import { alignTypes } from "./align-types";
 
 const tester = new RuleTester({
   parser: "@typescript-eslint/parser",
 });
 
-tester.run("align_types", align_types, {
+tester.run("align_types", alignTypes, {
   valid: [
     {
       name: "interface: normal properties",
       code: `
         interface Layer {
-          name /*  */: string;
-          locked /**/: boolean;
+          name:   string;
+          locked: boolean;
         }
       `,
     },
@@ -33,7 +33,6 @@ tester.run("align_types", align_types, {
           locked: boolean;
         }
       `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       options: [{ disableInterfaces: true }],
     },
     {
@@ -62,7 +61,6 @@ tester.run("align_types", align_types, {
           locked: boolean;
         }
       `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       options: [{ disableTypeLiterals: true }],
     },
   ],
@@ -79,14 +77,13 @@ tester.run("align_types", align_types, {
       `,
       output: `
         interface Layer {
-          name /*      */: string;
-          locked /*    */: boolean;
-          created_at /**/: string;
+          name: string;
+          locked: boolean;
+          created_at: string;
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "interface_not_aligned",
         },
       ],
@@ -102,14 +99,13 @@ tester.run("align_types", align_types, {
       `,
       output: `
         interface Layer {
-          name /*     */?: string;
-          locked /*   */?: boolean;
-          created_at /**/: string;
+          name?:      string;
+          locked?:    boolean;
+          created_at: string;
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "interface_not_aligned",
         },
       ],
@@ -125,39 +121,13 @@ tester.run("align_types", align_types, {
       `,
       output: `
         interface Layer {
-          readonly name /**/: string;
-          locked /*      */?: boolean;
-          created_at /*   */: string;
+          readonly name: string;
+          locked?:       boolean;
+          created_at:    string;
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
-          messageId: "interface_not_aligned",
-        },
-      ],
-    },
-    {
-      name: "interface: custom spacing character",
-      code: `
-        interface Layer {
-          name: string;
-          locked: boolean;
-          created_at: string;
-        }
-      `,
-      output: `
-        interface Layer {
-          name /*######*/: string;
-          locked /*####*/: boolean;
-          created_at /**/: string;
-        }
-      `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
-      options: [{ spacingCharacter: "#" }],
-      errors: [
-        {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "interface_not_aligned",
         },
       ],
@@ -174,14 +144,14 @@ tester.run("align_types", align_types, {
       `,
       output: `
         type Layer = {
-          name /*      */: string;
-          locked /*    */: boolean;
-          created_at /**/: string;
+          name: string;
+          locked: boolean;
+          created_at: string;
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
+          
           messageId: "type_literal_not_aligned",
         },
       ],
@@ -197,14 +167,14 @@ tester.run("align_types", align_types, {
       `,
       output: `
         type Layer = {
-          name /*     */?: string;
-          locked /*   */?: boolean;
-          created_at /**/: string;
+          name?:      string;
+          locked?:    boolean;
+          created_at: string;
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
+          
           messageId: "type_literal_not_aligned",
         },
       ],
@@ -220,39 +190,14 @@ tester.run("align_types", align_types, {
       `,
       output: `
         type Layer = {
-          readonly name /**/: string;
-          locked /*      */?: boolean;
-          created_at /*   */: string;
+          readonly name: string;
+          locked?:       boolean;
+          created_at:    string;
         }
       `,
       errors: [
         {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
-          messageId: "type_literal_not_aligned",
-        },
-      ],
-    },
-    {
-      name: "type: custom spacing character",
-      code: `
-        type Layer = {
-          name: string;
-          locked: boolean;
-          created_at: string;
-        }
-      `,
-      output: `
-        type Layer = {
-          name /*######*/: string;
-          locked /*####*/: boolean;
-          created_at /**/: string;
-        }
-      `,
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
-      options: [{ spacingCharacter: "#" }],
-      errors: [
-        {
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
+          
           messageId: "type_literal_not_aligned",
         },
       ],

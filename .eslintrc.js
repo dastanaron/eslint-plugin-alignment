@@ -1,19 +1,16 @@
 module.exports = {
-  root /*         */: true,
-  env /*          */: {
+  root          : true,
+  env           : {
     node: true,
   },
-  parser /*       */: "@typescript-eslint/parser",
-  plugins /*      */: ["@typescript-eslint", "prefer-snakecase"],
-  extends /*      */: [
+  parser        : "@typescript-eslint/parser",
+  plugins       : ["@typescript-eslint"],
+  extends       : [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prefer-snakecase/recommended",
   ],
-  /* eslint-disable prefer-snakecase/prefer-snakecase */
-  parserOptions /**/: {
-    ecmaVersion /**/: 12,
-    sourceType /* */: "module",
+  parserOptions : {
+    ecmaVersion : 12,
+    sourceType  : "module",
   },
-  /* eslint-disable prefer-snakecase/prefer-snakecase */
 };

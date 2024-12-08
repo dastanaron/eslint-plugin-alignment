@@ -11,8 +11,6 @@ Aligns the members of a TypeScript enum.
 Examples of **incorrect** code:
 
 ```ts
-/*eslint align-enums: "warn"*/
-
 enum Direction {
   UP = "up",
   DOWN = "down",
@@ -24,33 +22,12 @@ enum Direction {
 Examples of **correct** code:
 
 ```ts
-/*eslint align-enums: "warn"*/
-
 enum Direction {
-  UP /*   */ = "up",
-  DOWN /* */ = "down",
-  LEFT /* */ = "left",
-  RIGHT /**/ = "right",
+  UP    = "up",
+  DOWN  = "down",
+  LEFT  = "left",
+  RIGHT = "right",
 }
 ```
 
 ## Options
-
-### `spacingCharacter`
-
-- Type: `string`
-- Default: `" "`
-
-The spacing character inserted between the comments. The Length of the character must be one.
-
-```ts
-/*eslint align-enums: ["warn", "always", { "spacingCharacter": "-" }]*/
-
-// Valid
-enum Direction {
-  UP /*---*/ = "up",
-  DOWN /*-*/ = "down",
-  LEFT /*-*/ = "left",
-  RIGHT /**/ = "right",
-}
-```

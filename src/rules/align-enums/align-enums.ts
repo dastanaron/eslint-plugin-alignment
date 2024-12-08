@@ -1,4 +1,4 @@
-import { create_rule, get_alignment_comment } from "../../utils";
+import { createRule, getAlignmentSpaces } from "../../utils";
 import stringify from "json-stringify-safe";
 import { TSESTree } from "@typescript-eslint/utils";
 
@@ -13,15 +13,13 @@ type MemberWithLocation = {
 
 type Options = [
   {
-    // eslint-disable-next-line prefer-snakecase/prefer-snakecase
     spacingCharacter?: string;
   },
 ];
 
 type MessageIds = "not_aligned";
 
-export const align_enums = create_rule<Options, MessageIds>({
-  /* eslint-disable prefer-snakecase/prefer-snakecase */
+export const align_enums = createRule<Options, MessageIds>({
   name: "align-enums",
   meta: {
     docs: {
@@ -52,11 +50,9 @@ export const align_enums = create_rule<Options, MessageIds>({
       spacingCharacter: " ",
     },
   ],
-  create(context, [{ spacingCharacter: spacing_character }]) {
-    /* eslint-enable prefer-snakecase/prefer-snakecase */
+  create(context) {
     // noinspection JSUnusedGlobalSymbols
     return {
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       TSEnumDeclaration(node) {
         const members = JSON.parse(
           stringify(node.members)
@@ -104,7 +100,6 @@ export const align_enums = create_rule<Options, MessageIds>({
 
         context.report({
           node: node.id,
-          // eslint-disable-next-line prefer-snakecase/prefer-snakecase
           messageId: "not_aligned",
           *fix(fixer) {
             const member_with_longest_key = members_with_location.reduce(
@@ -115,10 +110,8 @@ export const align_enums = create_rule<Options, MessageIds>({
             for (const member of members_with_location) {
               yield fixer.insertTextAfter(
                 member.id,
-                " " + // Extra leading space
-                  get_alignment_comment(
+                  getAlignmentSpaces(
                     member_with_longest_key.id_end - member.id_end,
-                    spacing_character
                   )
               );
             }

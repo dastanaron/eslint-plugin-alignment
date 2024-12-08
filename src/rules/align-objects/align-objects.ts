@@ -2,7 +2,7 @@ import { Rule, AST } from "eslint";
 import stringify from "json-stringify-safe";
 import { Property, SpreadElement } from "estree";
 import {
-  get_alignment_comment,
+  getAlignmentSpaces,
   is_function_expression_node,
   is_property_node,
 } from "../../utils";
@@ -18,7 +18,6 @@ type PropertyWithLocation = {
 };
 
 export const align_objects: Rule.RuleModule = {
-  /* eslint-disable prefer-snakecase/prefer-snakecase */
   meta: {
     docs: {
       description: "Aligns JS object values",
@@ -58,10 +57,8 @@ export const align_objects: Rule.RuleModule = {
     fixable: "code",
     type: "layout",
   },
-  /* eslint-enable prefer-snakecase/prefer-snakecase */
   create(context) {
     const [, settings = {}] = context.options;
-    const spacing_character = String(settings.spacingCharacter || " ");
     const ignore_parent_types: string[] = Array.isArray(
       settings.ignoreParentTypes
     )
@@ -73,7 +70,6 @@ export const align_objects: Rule.RuleModule = {
 
     // noinspection JSUnusedGlobalSymbols
     return {
-      // eslint-disable-next-line prefer-snakecase/prefer-snakecase
       ObjectExpression(node) {
         if (ignore_parent_types.includes(node.parent.type)) {
           return;
@@ -149,10 +145,8 @@ export const align_objects: Rule.RuleModule = {
                   // properties: ["computed"] -> ["computed"] /**/
                   yield fixer.insertTextAfterRange(
                     [start + 1, end + 1],
-                    " " + // Extra leading space
-                      get_alignment_comment(
+                       getAlignmentSpaces(
                         property_with_longest_key.key_end - property.key_end,
-                        spacing_character
                       )
                   );
                 } else {
@@ -160,23 +154,19 @@ export const align_objects: Rule.RuleModule = {
                   // properties: ["computed"] -> ["computed" /**/]
                   yield fixer.insertTextAfter(
                     property.key,
-                    " " + // Extra leading space
-                      get_alignment_comment(
+                      getAlignmentSpaces(
                         property_with_longest_key.key_end - property.key_end,
-                        spacing_character
                       )
                   );
                 }
               } else {
                 yield fixer.insertTextAfter(
                   property.key,
-                  " " + // Extra leading space
-                    get_alignment_comment(
+                     getAlignmentSpaces(
                       property_with_longest_key.key_end -
                         property.key_end +
                         // Add an extra column for missing colon on function expressions
                         Number(is_function_expression_node(property.value)),
-                      spacing_character
                     ) + // Handle function expressions (`do_something() {}` does not have a colon)
                     (is_function_expression_node(property.value) ? " " : "")
                 );

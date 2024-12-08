@@ -1,7 +1,5 @@
 # eslint-plugin-alignment
 
-![GitHub Workflow Status](https://github.com/zignis/eslint-plugin-alignment/actions/workflows/main.yaml/badge.svg)
-![npm](https://img.shields.io/npm/v/eslint-plugin-alignment?style=plastic)
 
 > [!WARNING]  
 > This plugin is still in beta, and some rules might not work as expected.
@@ -34,14 +32,14 @@ const person = {
 
 ```js
 const person = {
-  name /*         */: "Connor",
-  age /*          */: 26,
-  jobTitle /*     */: "Musician",
-  city /*         */: "New York",
-  country /*      */: "USA",
-  favoriteColor /**/: "Blue",
-  hobbies /*      */: ["Reading", "Cooking", "Hiking"],
-  getSomething /* */: () => "something",
+  name:          "Connor",
+  age:           26,
+  jobTitle:      "Musician",
+  city:          "New York",
+  country:       "USA",
+  favoriteColor: "Blue",
+  hobbies:       ["Reading", "Cooking", "Hiking"],
+  getSomething:  () => "something",
 };
 ```
 
@@ -68,13 +66,13 @@ enum DaysOfWeek {
 
 ```ts
 enum DaysOfWeek {
-  MONDAY /*   */ = "Monday",
-  TUESDAY /*  */ = "Tuesday",
-  WEDNESDAY /**/ = "Wednesday",
-  THURSDAY /* */ = "Thursday",
-  FRIDAY /*   */ = "Friday",
-  SATURDAY /* */ = "Saturday",
-  SUNDAY /*   */ = "Sunday",
+  MONDAY    = "Monday",
+  TUESDAY   = "Tuesday",
+  WEDNESDAY = "Wednesday",
+  THURSDAY  = "Thursday",
+  FRIDAY    = "Friday",
+  SATURDAY  = "Saturday",
+  SUNDAY    = "Sunday",
 }
 ```
 
@@ -104,20 +102,18 @@ interface User {
 <td>
 
 ```ts
-// prettier-ignore
 type ContactInfo = {
-  name /*    */: string;
-  email /*   */: string;
-  phone /*  */?: string;
-  address /**/?: string;
+  name:      string;
+  email:     string;
+  phone?:    string;
+  address:   string;
 };
 
-// prettier-ignore
 interface User {
-  id /*      */: number;
-  username /**/: string;
-  email /*   */: string;
-  age /*     */: number;
+  id:       number;
+  username: string;
+  email:    string;
+  age:      number;
 }
 ```
 
